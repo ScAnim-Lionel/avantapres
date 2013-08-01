@@ -1,21 +1,21 @@
- import processing.serial.*;
+import processing.serial.*;
  
  float Pot1 = 0;
  float Pot2 = 0;
  float Pot3 = 0;
-
- Serial myPort;
-
-
+ 
+Serial myPort;
+ 
 PImage img1, img2;
 int picAlpha = 255;
-
+ 
 void setup() {
-  size(1280, 828, P3D);
+   size(1280, 828, P3D);
+ 
   img1 = loadImage("auzat2_1.jpg");
-  img2 = loadImage("auzat2_2.jpg"); 
+  img2 = loadImage("auzat2_2.jpg");
   noStroke();
-  
+ 
    // List all the available serial ports
  println(Serial.list());
  // I know that the first port in the serial list on my mac
@@ -24,33 +24,29 @@ void setup() {
  myPort = new Serial(this, Serial.list()[8], 9600);
  // don't generate a serialEvent() unless you get a newline character:
  myPort.bufferUntil('\n');
-  
-  
+ 
+ 
 }
-
+ 
 void draw() {
   
-  picAlpha = int(map(mouseX, 0, width, 0, 255));
-  
-  background(0);
-  
-  tint(255, 255);
-  image(img1, 0, 0);
+//  picAlpha = int(map(mouseX, 0, width, 0, 255));
 
-  blendMode(BLEND);  
-//  tint(255, picAlpha);
+background(img1);
+ 
+image(img2, 0, 0);
 tint(255, Pot1);
-  image(img2, 0, 0);
+ 
 }
-
- void serialEvent(Serial myPort) { 
+ 
+ void serialEvent(Serial myPort) {
  // get the ASCII string:
  String inString = myPort.readStringUntil('\n');
  
  if (inString != null) {
  // trim off any whitespace:
  inString = trim(inString);
- // split the string on the commas and convert the 
+ // split the string on the commas and convert the
  // resulting substrings into an integer array:
  float[] potvalue = float(split(inString, ","));
  // if the array has at least three elements, you know
@@ -65,8 +61,9 @@ tint(255, Pot1);
 }
 }
 
+/*
 void mouseDragged() {
   if (height - 50 < mouseY) {
     picAlpha = int(map(mouseX, 0, width, 0, 255));
   }
-}
+}*/
