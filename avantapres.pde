@@ -14,7 +14,6 @@ int no_image=0;
  
 Serial myPort;
 */ 
-PImage img1, img2;
  
 void setup() {
    size(1280, 1024, P3D);
@@ -22,7 +21,6 @@ void setup() {
        img = new PImage[nb_images];
       for (int i=0; i<nb_images; i++) {
             img[i] = loadImage(i + ".jpg");
-            println(i);
     noStroke();
       }
 /*      
@@ -76,6 +74,8 @@ tint(255, picAlpha);
 }
 */
   void keyReleased() {
+                println(no_image);
+
   if (key == 'a') {
      if (no_image==nb_images-2)
   {
@@ -85,7 +85,19 @@ tint(255, picAlpha);
   {
     no_image = no_image + 2; 
     }
-  }}
+  }
+if (key == 'b') {
+     if (no_image==0)
+  {
+    no_image = nb_images-2; 
+  }
+  else
+  {
+    no_image = no_image - 2;
+    }
+  }
+
+}
 
 void mouseDragged() {
 if (height - 50 < mouseY) {
