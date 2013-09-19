@@ -7,13 +7,13 @@ int picAlpha = 255;
 int nb_images=12;
 int no_image=0;
  
-/* 
+
  float Pot1 = 0;
  float Pot2 = 0;
  float Pot3 = 0;
  
 Serial myPort;
-*/ 
+ 
  
 void setup() {
    size(1280, 1024, P3D);
@@ -22,35 +22,37 @@ void setup() {
       for (int i=0; i<nb_images; i++) {
             img[i] = loadImage(i + ".jpg");
     noStroke();
+    noCursor();
       }
-/*      
+      
  
    // List all the available serial ports
  println(Serial.list());
  // I know that the first port in the serial list on my mac
  // is always my Arduino, so I open Serial.list()[0].
  // Open whatever port is the one you're using.
- myPort = new Serial(this, Serial.list()[8], 9600);
+ myPort = new Serial(this, Serial.list()[1], 9600);
  // don't generate a serialEvent() unless you get a newline character:
  myPort.bufferUntil('\n');
-*/ 
+ 
  
 }
  
 void draw() {
   
-picAlpha = int(map(mouseX, 0, width, 0, 255));
-
+/*
+ picAlpha = int(map(mouseX, 0, width, 0, 255));
+*/
 background(img[no_image]); 
 image(img[no_image+1], 0, 0);
-tint(255, picAlpha);
+tint(255, Pot1);
 
 
 }
 
 
 
-/* 
+ 
  void serialEvent(Serial myPort) {
  // get the ASCII string:
  String inString = myPort.readStringUntil('\n');
@@ -72,11 +74,11 @@ tint(255, picAlpha);
  }
 }
 }
-*/
-  void keyReleased() {
-                println(no_image);
 
-  if (key == 'a') {
+  void keyReleased() {
+//                println(no_image);
+
+  if (keyCode == 39) {
      if (no_image==nb_images-2)
   {
     no_image = 0; 
@@ -86,7 +88,7 @@ tint(255, picAlpha);
     no_image = no_image + 2; 
     }
   }
-if (key == 'b') {
+if (keyCode == 37) {
      if (no_image==0)
   {
     no_image = nb_images-2; 
@@ -97,10 +99,11 @@ if (key == 'b') {
     }
   }
 
-}
+} 
 
+/*
 void mouseDragged() {
 if (height - 50 < mouseY) {
 picAlpha = int(map(mouseX, 0, width, 0, 255));
 }
-}
+}*/
