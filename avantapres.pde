@@ -4,7 +4,7 @@ PImage[] img;
 
 int picAlpha = 255;
 //variables
-int nb_images=12;
+int nb_images=26;
 int no_image=0;
  
 
